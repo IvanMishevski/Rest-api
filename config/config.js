@@ -10,6 +10,11 @@ const config = {
         port: process.env.PORT || 5000,
         dbURL: process.env.DB_URL_CREDENTIALS,
         origin: []
+    },
+    default: {
+        port: 5000,
+        dbURL: 'mongodb://localhost:27017/recipe-community',
+        origin: []
     }
 };
 

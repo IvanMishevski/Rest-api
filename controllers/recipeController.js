@@ -22,16 +22,23 @@ function getRecipe(req, res, next) {
         .catch(next);
 }
 
-function createRecipe(req, res, next) {
-    const { recipeName, commentText } = req.body;
-    const { _id: userId } = req.user;
+async function createRecipe(req, res, next) {
+    try {
+        const { recipeName, description, image } = req.body;
+        const { _id: userId } = req.user;
 
-    recipeModel.create({ recipeName, userId, subscribers: [userId] })
-        .then(recipe => {
-            newComment(commentText, userId, recipe._id)
-                .then(([_, updatedRecipe]) => res.status(200).json(updatedRecipe))
-        })
-        .catch(next);
+        const newRecipe = await recipeModel.create({ 
+            recipeName, 
+            description, 
+            image, 
+            userId, 
+            subscribers: [userId] 
+        });
+
+        res.status(201).json(newRecipe);
+    } catch (error) {
+        next(error);
+    }
 }
 
 function subscribe(req, res, next) {
