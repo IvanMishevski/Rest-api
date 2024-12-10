@@ -7,7 +7,6 @@ function getRecipes(req, res, next) {
         .then(recipes => res.json(recipes))
         .catch(next);
 }
-
 function getRecipe(req, res, next) {
     const { recipeId } = req.params;
 
@@ -20,6 +19,20 @@ function getRecipe(req, res, next) {
           })
         .then(recipe => res.json(recipe))
         .catch(next);
+}
+function delRecipe(req, res, next) {
+    const { recipeId } = req.params;
+
+    recipeModel.findOneAndDelete({ _id: recipeId })
+        .then((deletedRecipe) => {
+            if (!deletedRecipe) {
+                return res.status(404).json({ message: 'Recipe not found' });
+            }
+            res.status(200).json({ message: 'Recipe deleted successfully', deletedRecipe });
+        })
+        .catch((error) => {
+            next(error);
+        });
 }
 
 async function createRecipe(req, res, next) {
@@ -56,4 +69,5 @@ module.exports = {
     createRecipe,
     getRecipe,
     subscribe,
+    delRecipe
 }
