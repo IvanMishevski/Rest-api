@@ -63,11 +63,30 @@ function subscribe(req, res, next) {
         })
         .catch(next);
 }
+function editRecipe(req, res, next) {
+    const { recipeId } = req.params;
+    const { recipeName, description, image } = req.body;
+    const { _id: userId } = req.user;
+
+    recipeModel.findOneAndUpdate(
+        { _id: recipeId, userId: userId },
+        { recipeName, description, image },
+        { new: true, runValidators: true }
+    )
+        .then((updatedRecipe) => {
+            if (!updatedRecipe) {
+                return res.status(404).json({ message: 'Recipe not found or unauthorized' });
+            }
+            res.json(updatedRecipe);
+        })
+        .catch(next);
+}
 
 module.exports = {
     getRecipes,
     createRecipe,
     getRecipe,
     subscribe,
-    delRecipe
+    delRecipe,
+    editRecipe
 }
