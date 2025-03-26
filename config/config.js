@@ -3,7 +3,7 @@ const env = process.env.NODE_ENV || 'development';
 const config = {
     development: {
         port: process.env.PORT || 5000,
-        dbURL: 'mongodb://localhost:27017/recipe-community',
+        dbURL: 'mongodb://localhost:27017/freelance-job-board',
         origin: ['http://localhost:5555', 'http://localhost:4200']
     },
     production: {
@@ -13,7 +13,7 @@ const config = {
     },
     default: {
         port: 5000,
-        dbURL: 'mongodb://localhost:27017/recipe-community',
+        dbURL: 'mongodb://localhost:27017/freelance-job-board',
         origin: []
     }
 };

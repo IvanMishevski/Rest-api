@@ -1,23 +1,19 @@
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema.Types;
 
-const commentSchema = new mongoose.Schema({
+const applicationSchema = new mongoose.Schema({
     text: {
         type: String,
-        required: true
+        required: true    
     },
-    likes: [{
-        type: ObjectId,
-        ref: "User"
-    }],
     userId: {
         type: ObjectId,
         ref: "User"
     },
-    recipeId: {
+    jobId: {
         type: ObjectId,
-        ref: "recipeId"
+        ref: "jobId"
     },
 }, { timestamps: { createdAt: 'created_at' } });
 
-module.exports = mongoose.model('Comment', commentSchema);
+module.exports = mongoose.model('Application', applicationSchema);

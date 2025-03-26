@@ -1,12 +1,12 @@
 const userModel = require('./userModel');
 const tokenBlacklistModel = require('./tokenBlacklistModel');
-const recipeModel = require('./recipeModel');
-const commentModel = require('./commentModel');
+const jobModel = require('./jobModel');
+const applicationModel = require('./applicationModel');
 
 
 module.exports = {
     userModel,
     tokenBlacklistModel,
-    recipeModel,
-    commentModel
+    jobModel,
+    applicationModel
 }
